@@ -1,0 +1,96 @@
+.page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.A4 {
+  width: 21cm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.landScape {
+  width: 29.7cm;
+  height: 21cm;
+}
+.headerLetter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.spTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.SPletter {
+  padding: 50px;
+  padding-top: 30px;
+}
+
+.spNumber {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.noSp {
+  font-weight: 700;
+}
+
+.titleSp {
+  border-bottom: 1px solid black;
+  font-weight: 700;
+}
+
+.fromTrack {
+  margin-left: 30px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kepada {
+  border-bottom: 1px solid black;
+  width: max-content;
+}
+
+.fromTracksent {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tableTrack {
+  margin-top: 20px;
+}
+
+.tableTrack table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableTrack td,
+th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+.headerTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tanggal {
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.footer {
+  margin-top: 20px;
+}

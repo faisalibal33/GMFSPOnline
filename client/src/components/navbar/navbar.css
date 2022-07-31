@@ -1,0 +1,12 @@
+.navbarContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #9b1616;
+  margin: 0;
+  padding: 0;
+}
+
+.gmflogo {
+  filter: grayscale(40%);
+}
