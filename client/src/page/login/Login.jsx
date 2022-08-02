@@ -43,7 +43,7 @@ export default function Login() {
   return (
     <>
       <div className="loginContainer">
-        <div className="bg-image">tes</div>
+        <div className="bg-image"></div>
         <Container component="main" maxWidth="xs" className="containerLogin">
           <CssBaseline />
           <Box

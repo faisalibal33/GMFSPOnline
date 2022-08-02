@@ -15,20 +15,21 @@ export const fetchShipping = createAsyncThunk(
   }
 );
 
-// export const updateShipping = createAsyncThunk(
-//   "shipping/updateShipping",
-//   async (value) => {
-//     await axios.put(`http://localhost:8800/api/shipping/${value.id}`, value);
-//     return await axios
-//       .get("http://localhost:8800/api/request")
-//       .then((res) => res.data);
-//   }
-// );
+export const updateShipping = createAsyncThunk(
+  "shipping/updateShipping",
+  async (value) => {
+    console.log(value);
+    await axios.put(`http://localhost:8800/api/shipping/${value.id}`, value);
+    return await axios
+      .get("http://localhost:8800/api/shipping")
+      .then((res) => res.data);
+  }
+);
 
 export const postShipping = createAsyncThunk(
   "shipping/postShipping",
   async (value) => {
-    axios.post(`http://localhost:8800/api/shipping/`, value);
+    axios.post(`http://localhost:8800/api/shipping`, value);
     return await axios
       .get("http://localhost:8800/api/shipping")
       .then((res) => res.data);

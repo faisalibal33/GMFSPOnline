@@ -9,6 +9,9 @@ const ShippingSchema = new mongoose.Schema(
       type: String,
       default: "-",
     },
+    account: {
+      type: String,
+    },
     sender: {
       type: String,
       required: true,

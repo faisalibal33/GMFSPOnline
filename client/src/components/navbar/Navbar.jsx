@@ -15,10 +15,13 @@ import "./navbar.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import HomeRepairServiceOutlinedIcon from "@mui/icons-material/HomeRepairServiceOutlined";
+import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
+import faisal from "../../images/faisal.jpg";
 
 const Navbar = ({ handleOpen }) => {
+  const items = JSON.parse(localStorage.getItem("user"));
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { dispatch } = useContext(AuthContext);
@@ -137,7 +140,11 @@ const Navbar = ({ handleOpen }) => {
                     fontWeight: "600",
                   }}
                 >
-                  Shipping
+                  <CottageOutlinedIcon
+                    fontSize="small"
+                    style={{ marginBottom: "-4px" }}
+                  />{" "}
+                  Home
                 </Button>
               </Link>
               <Link to="/" style={{ textDecoration: "none" }}>
@@ -150,10 +157,14 @@ const Navbar = ({ handleOpen }) => {
                     fontWeight: "600",
                   }}
                 >
+                  <HomeRepairServiceOutlinedIcon
+                    fontSize="small"
+                    style={{ marginBottom: "-4px", marginRight: "3px" }}
+                  />
                   All Shipping
                 </Button>
               </Link>
-              <Link to="/" style={{ textDecoration: "none" }}>
+              <Link to="/beingsent" style={{ textDecoration: "none" }}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -163,15 +174,29 @@ const Navbar = ({ handleOpen }) => {
                     fontWeight: "600",
                   }}
                 >
+                  <MarkunreadMailboxOutlinedIcon
+                    fontSize="small"
+                    style={{ marginBottom: "-4px" }}
+                  />{" "}
                   Being sent
                 </Button>
               </Link>
             </Box>
-
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: "rgb(78,78,78)",
+                display: "block",
+                fontWeight: "600",
+              }}
+            >
+              {items.name}
+            </Button>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Remy Sharp" src={faisal} />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -5,6 +5,9 @@
   background-color: #9b1616;
   margin: 0;
   padding: 0;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
 }
 
 .gmflogo {

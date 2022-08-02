@@ -56,6 +56,7 @@ const Page = () => {
       style={{
         backgroundColor: "#cccccc",
         margin: 0,
+        minHeight: "100vh",
         padding: "20px",
         width: "100vw",
       }}

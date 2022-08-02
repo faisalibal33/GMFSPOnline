@@ -1,6 +1,6 @@
 import { Box, Button, Container, Modal, Typography } from "@mui/material";
 import React from "react";
-import LogoutIcon from "@mui/icons-material/Logout";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const style = {
   position: "absolute",
@@ -19,16 +19,16 @@ const style = {
   flexDirection: "column",
 };
 
-const ModalLogout = ({ open, handleClose, logout }) => {
+const ModalDelete = ({ modalDelete, handleClose, handleDelete }) => {
   return (
     <Modal
-      open={open}
+      open={modalDelete}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <LogoutIcon
+        <DeleteForeverIcon
           sx={{
             fontSize: "70px",
             color: "#d32f2f",
@@ -46,7 +46,7 @@ const ModalLogout = ({ open, handleClose, logout }) => {
             color: "gray",
           }}
         >
-          Are you sure want to logout
+          Are you sure to delete letter
         </Typography>
         <Container
           sx={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}
@@ -54,7 +54,7 @@ const ModalLogout = ({ open, handleClose, logout }) => {
           <Button variant="contained" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="contained" color="error" onClick={logout}>
+          <Button variant="contained" color="error" onClick={handleDelete}>
             Logout
           </Button>
         </Container>
@@ -63,4 +63,4 @@ const ModalLogout = ({ open, handleClose, logout }) => {
   );
 };
 
-export default ModalLogout;
+export default ModalDelete;

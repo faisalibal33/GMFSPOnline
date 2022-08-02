@@ -1,22 +1,43 @@
-import { Button, TextField } from "@mui/material";
+import { Alert, AlertTitle, Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postShipping } from "../../redux/ShippingSlice";
+import { fetchShipping, postShipping } from "../../redux/ShippingSlice";
 import Navbar from "../navbar/Navbar";
 import "./createShipping.css";
 import { AuthContext } from "../../context/AuthContext";
 import ModalLogout from "../modal/ModalLogout";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import CardLetter from "../cardLetter/CardLetter";
+import ModalReceiver from "../modal/ModalRequest";
+import { useEffect } from "react";
+import Notification from "../notification/Notification";
 
 const CreateShipping = () => {
+  const dispatching = useDispatch();
   const { shipping, loading, error } = useSelector((state) => ({
     ...state.shipping,
   }));
+  const [cycle, setCycle] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+  useEffect(() => {
+    dispatching(fetchShipping());
+    setCycle(false);
+    console.log("cycle");
+  }, [cycle]);
+
+  const items = JSON.parse(localStorage.getItem("user"));
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setModalRequest(false);
+  };
+  const [modalRequest, setModalRequest] = useState(false);
   const [shippingValue, setShippingValue] = useState({
     aircraftReg: undefined,
     sender: undefined,
@@ -27,14 +48,21 @@ const CreateShipping = () => {
     receiverUnit: undefined,
     description: undefined,
     remark: undefined,
+    account: items._id,
   });
   const { dispatch } = useContext(AuthContext);
-  const dispatching = useDispatch();
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
       dispatching(postShipping(shippingValue));
+      setCycle(true);
+      setModalRequest(false);
+      setNotify({
+        isOpen: true,
+        message: "Submitted Successfully",
+        type: "success",
+      });
     } catch (err) {
       console.log("error cuk");
     }
@@ -42,17 +70,25 @@ const CreateShipping = () => {
 
   return (
     <div className="shippingContainer">
+      <Notification notify={notify} setNotify={setNotify} />
       <ModalLogout
         open={open}
         handleClose={handleClose}
         logout={() => dispatch({ type: "LOGOUT" })}
       />
+      <ModalReceiver
+        handleClose={handleClose}
+        handleClick={handleClick}
+        modalRequest={modalRequest}
+      />
       <Navbar handleOpen={handleOpen} />
       <div className="homeContainer">
         <div className="trackCard">
-          {shipping?.map((item) => (
-            <CardLetter key={item._id} item={item} />
-          ))}
+          {[...shipping]
+            .sort((a, b) => (a.updatedAt < b.updatedAt ? 1 : -1))
+            .map((item) => (
+              <CardLetter key={item._id} item={item} />
+            ))}
         </div>
         <div className="shippingBox">
           <div className="shippingTitle">
@@ -166,7 +202,11 @@ const CreateShipping = () => {
               }
             />
             <div className="buttonCreate">
-              <Button variant="contained" onClick={handleClick}>
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={() => setModalRequest(true)}
+              >
                 Submit
               </Button>
             </div>

@@ -8,11 +8,12 @@ import { fetchUsers } from "./redux/usersSlice";
 import Login from "./page/login/Login";
 import { AuthContext } from "./context/AuthContext";
 import Page from "./components/pageA4/Page";
+import ProgressSent from "./components/ProgressSent/ProgressSent";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchShipping());
+    // dispatch(fetchShipping());
     dispatch(fetchUsers());
   }, []);
 
@@ -53,6 +54,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Page />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/beingsent"
+            element={
+              <ProtectedRoute>
+                <ProgressSent />
               </ProtectedRoute>
             }
           />
